@@ -1,0 +1,120 @@
+﻿// ...existing code...
+using System;
+using DalFacade.DalApi;
+using Dal; // DalList project types are in namespace Dal
+
+namespace DalTest
+{
+    internal class Program
+    {
+        // Initialize unified DAL according to step 4 requirements
+        private static IDal s_dal = new DalList();
+
+        private static void Main()
+        {
+            Console.WriteLine("Hello, World!");
+
+            try
+            {
+                Initialization.Initialize(s_dal);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Caught an exception: {e.Message}");
+            }
+
+            while (true)
+            {
+                Console.WriteLine("\nInsert 1 for customer, 2 for product, 3 for sale, 0 to exit:");
+                string input = Console.ReadLine();
+                if (!int.TryParse(input, out int choice))
+                {
+                    Console.WriteLine("Invalid input. Try again.");
+                    continue;
+                }
+
+                if (choice == 0)
+                    return;
+
+                switch (choice)
+                {
+                    case 1:
+                        RunEntityMenu("Customer", s_dal.Customer);
+                        break;
+                    case 2:
+                        RunEntityMenu("Product", s_dal.Product);
+                        break;
+                    case 3:
+                        RunEntityMenu("Sale", s_dal.Sale);
+                        break;
+                    default:
+                        Console.WriteLine("Invalid selection.");
+                        break;
+                }
+            }
+        }
+
+        // Generic menu that works with any ICrud<T> for simple operations
+        private static void RunEntityMenu<T>(string entityName, ICrud<T> crud)
+        {
+            Console.WriteLine($"Selected {entityName}. Insert 1 for create, 2 for delete, 3 for update, 4 for read all, 5 for read by id:");
+            string input = Console.ReadLine();
+            if (!int.TryParse(input, out int funcChoice))
+            {
+                Console.WriteLine("Invalid input.");
+                return;
+            }
+
+            try
+            {
+                switch (funcChoice)
+                {
+                    case 1:
+                        Console.WriteLine("Create is entity-specific and not implemented in the generic test program.");
+                        break;
+                    case 2:
+                        Console.WriteLine("Enter id to delete:");
+                        if (int.TryParse(Console.ReadLine(), out int delId))
+                        {
+                            crud.Delete(delId);
+                            Console.WriteLine("Delete called.");
+                        }
+                        else Console.WriteLine("Invalid id.");
+                        break;
+                    case 3:
+                        Console.WriteLine("Update is entity-specific and not implemented in the generic test program.");
+                        break;
+                    case 4:
+                        var all = crud.ReadAll();
+                        if (all == null)
+                        {
+                            Console.WriteLine("No items or not supported.");
+                        }
+                        else
+                        {
+                            foreach (var item in all)
+                                Console.WriteLine(item);
+                        }
+                        break;
+                    case 5:
+                        Console.WriteLine("Enter id to read:");
+                        if (int.TryParse(Console.ReadLine(), out int readId))
+                        {
+                            var item = crud.Read(readId);
+                            Console.WriteLine(item == null ? "Not found." : item.ToString());
+                        }
+                        else Console.WriteLine("Invalid id.");
+                        break;
+                    default:
+                        Console.WriteLine("Invalid selection.");
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Operation threw exception: {e.Message}");
+            }
+        }
+    }
+}
+// ...existing code...

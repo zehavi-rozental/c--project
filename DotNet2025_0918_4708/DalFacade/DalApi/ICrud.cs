@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿using DO;
+namespace DalApi;
 public interface ICrud<T>
 {
     int Create(T item);

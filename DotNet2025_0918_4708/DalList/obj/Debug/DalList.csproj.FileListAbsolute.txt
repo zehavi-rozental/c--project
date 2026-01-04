@@ -1,0 +1,6 @@
+Z:\יד תשפו\רוזנטל זהבה\c#\c--project\DotNet2025_0918_4708\DalList\obj\Debug\DalList.GeneratedMSBuildEditorConfig.editorconfig
+Z:\יד תשפו\רוזנטל זהבה\c#\c--project\DotNet2025_0918_4708\DalList\obj\Debug\DalList.AssemblyInfoInputs.cache
+Z:\יד תשפו\רוזנטל זהבה\c#\c--project\DotNet2025_0918_4708\DalList\obj\Debug\DalList.AssemblyInfo.cs
+Z:\יד תשפו\רוזנטל זהבה\c#\c--project\DotNet2025_0918_4708\DalList\obj\Debug\DalList.csproj.CoreCompileInputs.cache
+Z:\יד תשפו\רוזנטל זהבה\c#\c--project\DotNet2025_0918_4708\DalList\obj\Debug\DalList.sourcelink.json
+Z:\יד תשפו\רוזנטל זהבה\c#\c--project\DotNet2025_0918_4708\DalList\obj\Debug\DalList.csproj.AssemblyReference.cache
