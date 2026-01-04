@@ -52,11 +52,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "Z:\\יד תשפו\\רוזנטל זהבה\\c#\\p\\DotNet2025_0918_4708\\DalTest\\DalTest.csproj",
+      "projectUniqueName": "Z:\\יד תשפו\\רוזנטל זהבה\\c#\\p\\c--project\\DotNet2025_0918_4708\\DalTest\\DalTest.csproj",
       "projectName": "DalTest",
-      "projectPath": "Z:\\יד תשפו\\רוזנטל זהבה\\c#\\p\\DotNet2025_0918_4708\\DalTest\\DalTest.csproj",
+      "projectPath": "Z:\\יד תשפו\\רוזנטל זהבה\\c#\\p\\c--project\\DotNet2025_0918_4708\\DalTest\\DalTest.csproj",
       "packagesPath": "C:\\Users\\huser\\.nuget\\packages\\",
-      "outputPath": "Z:\\יד תשפו\\רוזנטל זהבה\\c#\\p\\DotNet2025_0918_4708\\DalTest\\obj\\",
+      "outputPath": "Z:\\יד תשפו\\רוזנטל זהבה\\c#\\p\\c--project\\DotNet2025_0918_4708\\DalTest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -78,11 +78,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "Z:\\יד תשפו\\רוזנטל זהבה\\c#\\p\\DotNet2025_0918_4708\\DalFacade\\DalFacade.csproj": {
-              "projectPath": "Z:\\יד תשפו\\רוזנטל זהבה\\c#\\p\\DotNet2025_0918_4708\\DalFacade\\DalFacade.csproj"
+            "Z:\\יד תשפו\\רוזנטל זהבה\\c#\\p\\c--project\\DotNet2025_0918_4708\\DalFacade\\DalFacade.csproj": {
+              "projectPath": "Z:\\יד תשפו\\רוזנטל זהבה\\c#\\p\\c--project\\DotNet2025_0918_4708\\DalFacade\\DalFacade.csproj"
             },
-            "Z:\\יד תשפו\\רוזנטל זהבה\\c#\\p\\DotNet2025_0918_4708\\DalList\\DalList.csproj": {
-              "projectPath": "Z:\\יד תשפו\\רוזנטל זהבה\\c#\\p\\DotNet2025_0918_4708\\DalList\\DalList.csproj"
+            "Z:\\יד תשפו\\רוזנטל זהבה\\c#\\p\\c--project\\DotNet2025_0918_4708\\DalList\\DalList.csproj": {
+              "projectPath": "Z:\\יד תשפו\\רוזנטל זהבה\\c#\\p\\c--project\\DotNet2025_0918_4708\\DalList\\DalList.csproj"
             }
           }
         }
