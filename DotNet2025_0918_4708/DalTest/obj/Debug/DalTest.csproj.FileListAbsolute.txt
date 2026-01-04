@@ -4,3 +4,9 @@ Z:\יד תשפו\רוזנטל זהבה\c#\c--project\DotNet2025_0918_4708\DalTes
 Z:\יד תשפו\רוזנטל זהבה\c#\c--project\DotNet2025_0918_4708\DalTest\obj\Debug\DalTest.csproj.CoreCompileInputs.cache
 Z:\יד תשפו\רוזנטל זהבה\c#\c--project\DotNet2025_0918_4708\DalTest\obj\Debug\DalTest.sourcelink.json
 Z:\יד תשפו\רוזנטל זהבה\c#\c--project\DotNet2025_0918_4708\DalTest\obj\Debug\DalTest.csproj.AssemblyReference.cache
+Z:\יד תשפו\רוזנטל זהבה\c#\p\c--project\DotNet2025_0918_4708\DalTest\obj\Debug\DalTest.csproj.AssemblyReference.cache
+Z:\יד תשפו\רוזנטל זהבה\c#\p\c--project\DotNet2025_0918_4708\DalTest\obj\Debug\DalTest.GeneratedMSBuildEditorConfig.editorconfig
+Z:\יד תשפו\רוזנטל זהבה\c#\p\c--project\DotNet2025_0918_4708\DalTest\obj\Debug\DalTest.AssemblyInfoInputs.cache
+Z:\יד תשפו\רוזנטל זהבה\c#\p\c--project\DotNet2025_0918_4708\DalTest\obj\Debug\DalTest.AssemblyInfo.cs
+Z:\יד תשפו\רוזנטל זהבה\c#\p\c--project\DotNet2025_0918_4708\DalTest\obj\Debug\DalTest.csproj.CoreCompileInputs.cache
+Z:\יד תשפו\רוזנטל זהבה\c#\p\c--project\DotNet2025_0918_4708\DalTest\obj\Debug\DalTest.sourcelink.json
