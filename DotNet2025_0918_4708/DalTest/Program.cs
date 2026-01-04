@@ -10,9 +10,11 @@ namespace DelTest;
 class Program
 {
     // הגדרת משתנה סטטי לממשק הגישה לנתונים, הממומש על ידי DalList
+
     private static IDal s_dal = new DalList();
     static void Main()
     {
+
         try
         {
             // אתחול הנתונים הראשוניים
@@ -81,7 +83,7 @@ class Program
                     case 1: // Create
                         switch (entity)
                         {
-                            case "Customer": Create(s_dal.Product); break;                     
+                            case "Customer": Create(s_dal.Customer); break;
                             case "Product": Create(s_dal.Product); break;
                             case "Sale": Create(s_dal.Sale); break;
                         }
@@ -105,7 +107,7 @@ class Program
                     case 4: // Update
                         switch (entity)
                         {
-                            case "Customer": Update(s_dal.Product); break;
+                            case "Customer": Update(s_dal.Customer); break;
                             case "Product": Update(s_dal.Product); break;
                             case "Sale": Update(s_dal.Sale); break;
                         }
@@ -150,7 +152,7 @@ class Program
     }
 
     // מתודת Create גנרית
-    private static void Create<T>(ICrud<T> repo) where T : new()
+    private static void Create<T>(ICrud<T> repo)
     {
         try
         {
@@ -172,7 +174,7 @@ class Program
                 Console.Write("Price: "); double.TryParse(Console.ReadLine(), out double price);
                 Console.Write("Amount: "); int.TryParse(Console.ReadLine(), out int amount);
                 var p = new Product(id, name, category, price, amount);
-                int newId = repo.Create((T)(object)p);         
+                int newId = repo.Create((T)(object)p);
                 Console.WriteLine($"Created: {p} with ID: {newId}");
             }
             else if (typeof(T) == typeof(Sale))
@@ -244,7 +246,7 @@ class Program
     }
 
     // מתודת Update גנרית
-    private static void Update<T>(ICrud<T> repo) where T : new()
+    private static void Update<T>(ICrud<T> repo)
     {
         try
         {

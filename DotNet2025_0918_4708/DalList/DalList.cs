@@ -2,7 +2,7 @@
 
 namespace Dal;
 
-internal class DalList : IDal
+public class DalList : IDal
 {
     public ISale Sale => new SaleImplementation();
     public IProduct Product => new ProductImplementation();
