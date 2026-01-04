@@ -1,67 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DalApi;
+using DO;
 
-namespace Dal
+namespace Dal;
+
+internal class ProductImplementation : IProduct
 {
-    internal class Product : IProduct
+    public int Create(Product product)
     {
-        public int Create(Product product)
-        {
-            foreach (var c in products)
-            {
-                if (c?.Id == product.Id)
-                    throw new IdAlreadyExistsException("The ID " + id + " already exists.");
-            }
+        if (DataSource.Products.Any(p => p?.Id == product.Id))
+            throw new IdAlreadyExistsException("The ID " + product.Id + " already exists.");
 
-            Customer prod = item with { Id = id };
-            products[StaticValue] = prod;
-            return prod.id;
+        product.Id= DataSource.config.StaticValue;
+        DataSource.Products.Add(product);
+        return product.Id;
+    }
+
+    public Product? Read(int id)
+    {
+        foreach (var product in DataSource.Products)
+        {
+            if (product?.Id == id)
+                return product;
         }
+        throw new IdNotFoundException();
+    }
 
-        public Product? Read(int id)
+    public List<Product> ReadAll()
+    {
+        return new List<Product>(DataSource.Products.Where(p => p != null));
+    }
+
+    public void Update(Product product)
+    {
+        for (int i = 0; i < DataSource.Products.Count; i++)
         {
-
-            foreach (var product in products)
+            if (DataSource.Products[i]?.Id == product.Id)
             {
-                if (product?.Id == Id)
-                    return product;
-
+                DataSource.Products[i] = product;
+                return;
             }
+        }
+        throw new IdNotFoundException();
+    }
+
+    public void Delete(int id)
+    {
+        var product = DataSource.Products.FirstOrDefault(p => p?.Id == id);
+        if (product == null)
             throw new IdNotFoundException();
-        }
 
-        public List<Product> ReadAll()
-        {
-            return new List<Product>(products.Values);
-        }
-
-        public void Update(Product product)
-        {
-            foreach (var c in products)
-            {
-                if (product.id == c?.id)
-                {
-                    Delete(c.Id);
-                    products.Add(product);
-                }
-            }
-            throw new IdNotFoundException();
-        }
-
-        public void Delete(int id)
-        {
-            foreach (var c in products)
-            {
-                if (product.id == c?.id)
-                {
-                    Delete(c.Id);
-                }
-                throw new IdNotFoundException();
-            }
-
-
-            products.Remove(id);
-        }
+        DataSource.Products.Remove(product);
     }
 }

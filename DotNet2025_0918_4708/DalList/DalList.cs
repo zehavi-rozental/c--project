@@ -1,10 +1,13 @@
 ﻿using System;
 using DalApi;
 
-public class DalList
+namespace Dal;
+
+internal class DalList : IDal
 {
-	public ISale Sale => SaleImplementation();
+    public ISale Sale => SaleImplementation();
     public IProduct Product => ProductImplementation();
     public ICustomer Customer => CustomerImplementation();
-    
+
+   
 }

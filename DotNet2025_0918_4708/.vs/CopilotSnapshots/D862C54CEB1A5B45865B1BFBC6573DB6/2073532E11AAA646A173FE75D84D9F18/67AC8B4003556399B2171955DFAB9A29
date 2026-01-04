@@ -1,0 +1,48 @@
+﻿using System;
+using DalFacade.DalApi;
+using DO;
+
+namespace DalTest
+{
+    public static class Initialization
+    {
+        private static IDal s_dal;
+
+        public static void Initialize(IDal dal)
+        {
+            s_dal = dal ?? throw new ArgumentNullException(nameof(dal));
+
+            // Initialize data via DAL implementations
+            // Each createX method should use s_dal.X.Create(...) to populate DataSource lists
+            try
+            {
+                CreateCustomers();
+                CreateProducts();
+                CreateSales();
+            }
+            catch (Exception)
+            {
+                // Rethrow to be handled by caller
+                throw;
+            }
+        }
+
+        private static void CreateCustomers()
+        {
+            // Simple sample data to populate lists
+            s_dal.Customer.Create(new Customer(1, "Alice", "CityA"));
+            s_dal.Customer.Create(new Customer(2, "Bob", "CityB"));
+        }
+
+        private static void CreateProducts()
+        {
+            s_dal.Product.Create(new Product(1, "Apple", 10));
+            s_dal.Product.Create(new Product(2, "Banana", 5));
+        }
+
+        private static void CreateSales()
+        {
+            s_dal.Sale.Create(new Sale(1, 1, 1, 2));
+        }
+    }
+}

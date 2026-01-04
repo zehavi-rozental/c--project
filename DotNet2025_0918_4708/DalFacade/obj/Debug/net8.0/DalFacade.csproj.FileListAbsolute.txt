@@ -1,0 +1,5 @@
+Z:\יד תשפו\רוזנטל זהבה\c#\c--project\DotNet2025_0918_4708\DalFacade\obj\Debug\net8.0\DalFacade.GeneratedMSBuildEditorConfig.editorconfig
+Z:\יד תשפו\רוזנטל זהבה\c#\c--project\DotNet2025_0918_4708\DalFacade\obj\Debug\net8.0\DalFacade.AssemblyInfoInputs.cache
+Z:\יד תשפו\רוזנטל זהבה\c#\c--project\DotNet2025_0918_4708\DalFacade\obj\Debug\net8.0\DalFacade.AssemblyInfo.cs
+Z:\יד תשפו\רוזנטל זהבה\c#\c--project\DotNet2025_0918_4708\DalFacade\obj\Debug\net8.0\DalFacade.csproj.CoreCompileInputs.cache
+Z:\יד תשפו\רוזנטל זהבה\c#\c--project\DotNet2025_0918_4708\DalFacade\obj\Debug\net8.0\DalFacade.sourcelink.json
