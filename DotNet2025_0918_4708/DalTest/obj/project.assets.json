@@ -46,23 +46,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\huser\\.nuget\\packages\\": {},
+    "C:\\Users\\user\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "Z:\\יד תשפו\\פפנהיים אילה\\C#\\project\\c--project\\DotNet2025_0918_4708\\DalTest\\DalTest.csproj",
+      "projectUniqueName": "C:\\Users\\user\\Desktop\\programs\\B\\c#\\c# project\\c--project\\c--project-\\DotNet2025_0918_4708\\DalTest\\DalTest.csproj",
       "projectName": "DalTest",
-      "projectPath": "Z:\\יד תשפו\\פפנהיים אילה\\C#\\project\\c--project\\DotNet2025_0918_4708\\DalTest\\DalTest.csproj",
-      "packagesPath": "C:\\Users\\huser\\.nuget\\packages\\",
-      "outputPath": "Z:\\יד תשפו\\פפנהיים אילה\\C#\\project\\c--project\\DotNet2025_0918_4708\\DalTest\\obj\\",
+      "projectPath": "C:\\Users\\user\\Desktop\\programs\\B\\c#\\c# project\\c--project\\c--project-\\DotNet2025_0918_4708\\DalTest\\DalTest.csproj",
+      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\user\\Desktop\\programs\\B\\c#\\c# project\\c--project\\c--project-\\DotNet2025_0918_4708\\DalTest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\huser\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -78,11 +78,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "Z:\\יד תשפו\\פפנהיים אילה\\C#\\project\\c--project\\DotNet2025_0918_4708\\DalFacade\\DalFacade.csproj": {
-              "projectPath": "Z:\\יד תשפו\\פפנהיים אילה\\C#\\project\\c--project\\DotNet2025_0918_4708\\DalFacade\\DalFacade.csproj"
+            "C:\\Users\\user\\Desktop\\programs\\B\\c#\\c# project\\c--project\\c--project-\\DotNet2025_0918_4708\\DalFacade\\DalFacade.csproj": {
+              "projectPath": "C:\\Users\\user\\Desktop\\programs\\B\\c#\\c# project\\c--project\\c--project-\\DotNet2025_0918_4708\\DalFacade\\DalFacade.csproj"
             },
-            "Z:\\יד תשפו\\פפנהיים אילה\\C#\\project\\c--project\\DotNet2025_0918_4708\\DalList\\DalList.csproj": {
-              "projectPath": "Z:\\יד תשפו\\פפנהיים אילה\\C#\\project\\c--project\\DotNet2025_0918_4708\\DalList\\DalList.csproj"
+            "C:\\Users\\user\\Desktop\\programs\\B\\c#\\c# project\\c--project\\c--project-\\DotNet2025_0918_4708\\DalList\\DalList.csproj": {
+              "projectPath": "C:\\Users\\user\\Desktop\\programs\\B\\c#\\c# project\\c--project\\c--project-\\DotNet2025_0918_4708\\DalList\\DalList.csproj"
             }
           }
         }
@@ -96,8 +96,7 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      },
-      "SdkAnalysisLevel": "9.0.100"
+      }
     },
     "frameworks": {
       "net8.0": {
@@ -118,7 +117,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
