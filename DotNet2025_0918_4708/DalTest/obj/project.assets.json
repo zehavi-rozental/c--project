@@ -46,23 +46,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\user\\.nuget\\packages\\": {},
+    "C:\\Users\\huser\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\Desktop\\programs\\B\\c#\\c# project\\c--project\\c--project-\\DotNet2025_0918_4708\\DalTest\\DalTest.csproj",
+      "projectUniqueName": "Z:\\יד תשפו\\פפנהיים אילה\\C#\\חדש\\c--project\\DotNet2025_0918_4708\\DalTest\\DalTest.csproj",
       "projectName": "DalTest",
-      "projectPath": "C:\\Users\\user\\Desktop\\programs\\B\\c#\\c# project\\c--project\\c--project-\\DotNet2025_0918_4708\\DalTest\\DalTest.csproj",
-      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\Desktop\\programs\\B\\c#\\c# project\\c--project\\c--project-\\DotNet2025_0918_4708\\DalTest\\obj\\",
+      "projectPath": "Z:\\יד תשפו\\פפנהיים אילה\\C#\\חדש\\c--project\\DotNet2025_0918_4708\\DalTest\\DalTest.csproj",
+      "packagesPath": "C:\\Users\\huser\\.nuget\\packages\\",
+      "outputPath": "Z:\\יד תשפו\\פפנהיים אילה\\C#\\חדש\\c--project\\DotNet2025_0918_4708\\DalTest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\huser\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -70,19 +70,18 @@
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
+        "c:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\user\\Desktop\\programs\\B\\c#\\c# project\\c--project\\c--project-\\DotNet2025_0918_4708\\DalFacade\\DalFacade.csproj": {
-              "projectPath": "C:\\Users\\user\\Desktop\\programs\\B\\c#\\c# project\\c--project\\c--project-\\DotNet2025_0918_4708\\DalFacade\\DalFacade.csproj"
+            "Z:\\יד תשפו\\פפנהיים אילה\\C#\\חדש\\c--project\\DotNet2025_0918_4708\\DalFacade\\DalFacade.csproj": {
+              "projectPath": "Z:\\יד תשפו\\פפנהיים אילה\\C#\\חדש\\c--project\\DotNet2025_0918_4708\\DalFacade\\DalFacade.csproj"
             },
-            "C:\\Users\\user\\Desktop\\programs\\B\\c#\\c# project\\c--project\\c--project-\\DotNet2025_0918_4708\\DalList\\DalList.csproj": {
-              "projectPath": "C:\\Users\\user\\Desktop\\programs\\B\\c#\\c# project\\c--project\\c--project-\\DotNet2025_0918_4708\\DalList\\DalList.csproj"
+            "Z:\\יד תשפו\\פפנהיים אילה\\C#\\חדש\\c--project\\DotNet2025_0918_4708\\DalList\\DalList.csproj": {
+              "projectPath": "Z:\\יד תשפו\\פפנהיים אילה\\C#\\חדש\\c--project\\DotNet2025_0918_4708\\DalList\\DalList.csproj"
             }
           }
         }
@@ -96,7 +95,8 @@
         "enableAudit": "true",
         "auditLevel": "low",
         "auditMode": "direct"
-      }
+      },
+      "SdkAnalysisLevel": "9.0.300"
     },
     "frameworks": {
       "net8.0": {
@@ -117,16 +117,8 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "c:\\Program Files\\dotnet\\sdk\\9.0.302/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\user\\Desktop\\programs\\B\\c#\\c# project\\c--project\\c--project-\\DotNet2025_0918_4708\\DalTest\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }

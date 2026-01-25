@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
-using DalApi;
+﻿using DalApi;
 using DO;
+using System.Collections.Generic;
+using System.Linq;
+using static Dal.DataSource;
 
 namespace Dal;
 
@@ -8,50 +10,47 @@ internal class ProductImplementation : IProduct
 {
     public int Create(Product product)
     {
-        if (DataSource.Products.Any(p => p?.Id == product.Id))
+        var q = from p in DataSource.Products
+                where p?.Id == product.Id
+                select p;
+        Product prod = q.FirstOrDefault()!;
+        if (prod != null)
             throw new IdAlreadyExistsException("The ID " + product.Id + " already exists.");
-
-        int newId = DataSource.config.StaticValue;
-        Product newProduct = product with { Id = newId };
-
-        DataSource.Products.Add(newProduct);
-        return newId;
+        product = product with { Id = config.NextProductId };
+        DataSource.Products.Add(product);
+        return product.Id;
     }
 
     public Product? Read(int id)
     {
-        foreach (var product in DataSource.Products)
-        {
-            if (product?.Id == id)
-                return product;
-        }
-        throw new IdNotFoundException();
+        var r = from p in DataSource.Products
+                where p?.Id == id
+                select p;
+        Product product = r.FirstOrDefault()!;
+        if (product == null)
+            throw new IdNotFoundException();
+        return product;
     }
 
     public List<Product> ReadAll()
     {
-        return new List<Product>(DataSource.Products.Where(p => p != null));
+        return DataSource.Products.Where(p => p != null).ToList()!;
     }
 
     public void Update(Product product)
     {
-        for (int i = 0; i < DataSource.Products.Count; i++)
-        {
-            if (DataSource.Products[i]?.Id == product.Id)
-            {
-                DataSource.Products[i] = product;
-                return;
-            }
-        }
-        throw new IdNotFoundException();
+        Delete(product.Id);
+        Create(product);
     }
 
     public void Delete(int id)
     {
-        var product = DataSource.Products.FirstOrDefault(p => p?.Id == id);
+        var d = from p in DataSource.Products
+                where p?.Id == id
+                select p;
+        Product product = d.FirstOrDefault()!;
         if (product == null)
             throw new IdNotFoundException();
-
         DataSource.Products.Remove(product);
     }
 }

@@ -9,18 +9,25 @@ internal class CustomerImplementation : ICustomer
 {
     public int Create(Customer customer)
     {
-        if (Customers.Any(c => c?.Id == customer.Id))
+        var q = from c in Customers
+                where c?.Id == customer.Id
+                select c;
+        Customer cust = q.FirstOrDefault()!;
+        if (cust != null)
+        {
             throw new IdAlreadyExistsException("The ID " + customer.Id + " already exists.");
-
-        // שימוש ב-ID האוטומטי רק אם ה-ID שהתקבל הוא 0 (או ערך ברירת מחדל אחר)
-        customer.Id = customer.Id == 0 ? config.StaticValue : customer.Id;
+        }
+        customer = customer with { Id = config.NextCustomerId };
         Customers.Add(customer);
         return customer.Id;
     }
 
     public Customer? Read(int id)
     {
-        var customer = Customers.FirstOrDefault(c => c?.Id == id);
+        var r = from c in Customers
+                where c?.Id == id
+                select c;
+        Customer customer = r.FirstOrDefault()!;
         if (customer == null)
             throw new IdNotFoundException();
         return customer;
@@ -33,19 +40,18 @@ internal class CustomerImplementation : ICustomer
 
     public void Update(Customer customer)
     {
-        var index = Customers.FindIndex(c => c?.Id == customer.Id);
-        if (index == -1)
-            throw new IdNotFoundException();
-
-        Customers[index] = customer;
+        Delete(customer.Id);
+        Create(customer);
     }
 
     public void Delete(int id)
     {
-        var customer = Customers.FirstOrDefault(c => c?.Id == id);
-        if (customer == null)
+        var d = from c in Customers
+                where c?.Id == id
+                select c;
+        Customer customer = d.FirstOrDefault()!;
+        if (d == null)
             throw new IdNotFoundException();
-
         Customers.Remove(customer);
     }
 }

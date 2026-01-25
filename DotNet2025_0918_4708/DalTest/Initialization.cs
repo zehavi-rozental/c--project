@@ -43,8 +43,8 @@ public static class Initialization
         // יצירת מבצעי בדיקה
         s_dal.Sale.Create(new Sale(1, 1, 1, 199.99, true, new DateTime(2025, 6, 15), new DateTime(2025, 6, 25)));
         s_dal.Sale.Create(new Sale(2, 2, 2, 170.00, false, new DateTime(2025, 7, 1), new DateTime(2025, 7, 30)));
-        s_dal.Sale.Create(new Sale(3, 3, 1, 40.00, true, new DateTime(2025, 8, 1), new DateTime(2025, 8, 10)));
-        s_dal.Sale.Create(new Sale(4, 4, 3, 50.00, false, new DateTime(2025, 9, 1), new DateTime(2025, 9, 10)));
+        s_dal.Sale.Create(new Sale(0, 3, 1, 40.00, true, new DateTime(2025, 8, 1), new DateTime(2025, 8, 10)));
+        s_dal.Sale.Create(new Sale(0, 4, 3, 50.00, false, new DateTime(2025, 9, 1), new DateTime(2025, 9, 10)));
         s_dal.Sale.Create(new Sale(5, 5, 2, 500.00, true, new DateTime(2025, 10, 1), new DateTime(2025, 10, 15)));
     }
 }

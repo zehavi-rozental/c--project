@@ -10,17 +10,23 @@ internal class SaleImplementation : ISale
 {
     public int Create(Sale sale)
     {
-        if (Sales.Any(s => s?.Id == sale.Id))
+        var q = from s in Sales
+                where s?.Id == sale.Id
+                select s;
+        Sale sl = q.FirstOrDefault()!;
+        if (sl != null)
             throw new IdAlreadyExistsException("The ID " + sale.Id + " already exists.");
-
-        sale = sale with { Id = sale.Id == 0 ? config.StaticValue : sale.Id };
+        sale = sale with { Id = config.NextSaleId };
         Sales.Add(sale);
         return sale.Id;
     }
 
     public Sale? Read(int id)
     {
-        var sale = Sales.FirstOrDefault(s => s?.Id == id);
+        var r = from s in Sales
+                where s?.Id == id
+                select s;
+        Sale sale = r.FirstOrDefault()!;
         if (sale == null)
             throw new IdNotFoundException();
         return sale;
@@ -33,19 +39,18 @@ internal class SaleImplementation : ISale
 
     public void Update(Sale sale)
     {
-        var index = Sales.FindIndex(s => s?.Id == sale.Id);
-        if (index == -1)
-            throw new IdNotFoundException();
-
-        Sales[index] = sale;
+        Delete(sale.Id);
+        Create(sale);
     }
 
     public void Delete(int id)
     {
-        var sale = Sales.FirstOrDefault(s => s?.Id == id);
+        var d = from s in Sales
+                where s?.Id == id
+                select s;
+        Sale sale = d.FirstOrDefault()!;
         if (sale == null)
             throw new IdNotFoundException();
-
         Sales.Remove(sale);
     }
 }
