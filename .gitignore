@@ -1,0 +1,14 @@
+# תיקיות עזר של Visual Studio
+.vs/
+bin/
+obj/
+
+# קבצי הגדרות אישיים
+*.user
+*.userosscache
+*.sln.docstates
+
+# קבצים זמניים של NuGet
+/packages/
+*.nuget.props
+*.nuget.targets
