@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "task-DotNet2025_0918_4708",
+      "appliesTo": "/",
+      "type": "launch"
+    }
+  ]
+}

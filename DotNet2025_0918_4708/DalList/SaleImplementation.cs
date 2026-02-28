@@ -1,65 +1,51 @@
-﻿using System;
-using System.Runtime.InteropServices;
+﻿using System.Collections.Generic;
+using System.Linq;
+using DalApi;
+using DO;
+using static Dal.DataSource;
 
-namespace Dal
+namespace Dal;
+
+internal class SaleImplementation : ISale
 {
-        internal class Sale : ISale
-        public int Create(Sale sale)
-        {
-            foreach (var s in sales)
-            {
-                if (s?.Id == sale.Id)
-                throw new IdAlreadyExistsException("The ID " + id + " already exists.");
-        }
+    public int Create(Sale sale)
+    {
+        if (Sales.Any(s => s?.Id == sale.Id))
+            throw new IdAlreadyExistsException("The ID " + sale.Id + " already exists.");
 
-            Customer sa = sale with { Id = id };
-            sales[StaticValue] = sa;
-            return sa.id;
-        }
-
-        public Sale? Read(int id)
-        {
-
-            foreach (var sale in sales)
-            {
-                if (sale?.Id == Id)
-                    return sale;
-
-            }
-        throw new IdNotFoundException();
+        sale = sale with { Id = sale.Id == 0 ? config.StaticValue : sale.Id };
+        Sales.Add(sale);
+        return sale.Id;
     }
 
-        public List<Sale> ReadAll()
-        {
-            return new List<Sale>(sales.Values);
-        }
-
-        public void Update(Sale sale)
-        {
-            foreach (var c in sales)
-            {
-                if (sale.id == c?.id)
-                {
-                    Delete(c.Id);
-                    sales.Add(sale);
-                }
-            }
-        throw new IdNotFoundException();
-    }
-
-        public void Delete(int id)
-        {
-            foreach (var c in sales)
-            {
-                if (sale.id == c?.id)
-                {
-                    Delete(c.Id);
-                }
+    public Sale? Read(int id)
+    {
+        var sale = Sales.FirstOrDefault(s => s?.Id == id);
+        if (sale == null)
             throw new IdNotFoundException();
-        }
+        return sale;
+    }
 
+    public List<Sale> ReadAll()
+    {
+        return Sales.Where(s => s != null).ToList()!;
+    }
 
-           sale.Remove(id);
-        }
+    public void Update(Sale sale)
+    {
+        var index = Sales.FindIndex(s => s?.Id == sale.Id);
+        if (index == -1)
+            throw new IdNotFoundException();
+
+        Sales[index] = sale;
+    }
+
+    public void Delete(int id)
+    {
+        var sale = Sales.FirstOrDefault(s => s?.Id == id);
+        if (sale == null)
+            throw new IdNotFoundException();
+
+        Sales.Remove(sale);
     }
 }

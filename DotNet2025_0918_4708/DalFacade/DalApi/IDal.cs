@@ -1,9 +1,7 @@
-﻿using System;
-using System;
-using System.Collections.Generic;
-    public interface IDal
+﻿namespace DalApi;
+public interface IDal
 {
-	Isale sale { get;  }
-    Icustomer customer { get;  }    
-    Iproduct product { get;  }
+    ISale Sale { get; }
+    ICustomer Customer { get; }
+    IProduct Product { get; }
 }

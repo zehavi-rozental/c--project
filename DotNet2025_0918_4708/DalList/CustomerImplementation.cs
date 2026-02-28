@@ -1,67 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Linq;
 using DalApi;
+using DO;
+using static Dal.DataSource;
 
-namespace Dal
+namespace Dal;
+
+internal class CustomerImplementation : ICustomer
 {
-    internal class Customer : ICustomer
+    public int Create(Customer customer)
     {
-        public int Create(Customer customer)
-        {
-            foreach (var c in customers)
-            {
-                if (c?.Id== customer.Id)
-                 throw new IdAlreadyExistsException("The ID " + id + " already exists.");
-            }
+        if (Customers.Any(c => c?.Id == customer.Id))
+            throw new IdAlreadyExistsException("The ID " + customer.Id + " already exists.");
 
-            Customer cust = item with { Id = id };
-            customers[StaticValue] = cust;
-            return cust.id;
-        }
+        // שימוש ב-ID האוטומטי רק אם ה-ID שהתקבל הוא 0 (או ערך ברירת מחדל אחר)
+        customer.Id = customer.Id == 0 ? config.StaticValue : customer.Id;
+        Customers.Add(customer);
+        return customer.Id;
+    }
 
-        public Customer? Read(int id)
-        {
-           
-            foreach (var c in customers)
-            {
-                if (c?.Id == Id)
-                    return c;
-             
-            }
+    public Customer? Read(int id)
+    {
+        var customer = Customers.FirstOrDefault(c => c?.Id == id);
+        if (customer == null)
             throw new IdNotFoundException();
-        }
+        return customer;
+    }
 
-        public List<Customer> ReadAll()
-        {
-            return new List<Customer>(customers.Values);
-        }
+    public List<Customer> ReadAll()
+    {
+        return Customers.Where(c => c != null).ToList()!;
+    }
 
-        public void Update(Customer customer)
-        {
-            foreach (var c in customers)
-            {
-                if (customer.id==c?.id)
-                {
-                    Delete(c.Id);
-                    Customers.Add(customer);
-                }
-            }
+    public void Update(Customer customer)
+    {
+        var index = Customers.FindIndex(c => c?.Id == customer.Id);
+        if (index == -1)
             throw new IdNotFoundException();
-        }
 
-        public void Delete(int id)
-        {
-            foreach (var c in customers)
-            {
-                if (customer.id == c?.id)
-                {
-                    Delete(c.Id);
-                }
-                throw new IdNotFoundException();
-            }
-           
+        Customers[index] = customer;
+    }
 
-            customers.Remove(id);
-        }
+    public void Delete(int id)
+    {
+        var customer = Customers.FirstOrDefault(c => c?.Id == id);
+        if (customer == null)
+            throw new IdNotFoundException();
+
+        Customers.Remove(customer);
     }
 }
