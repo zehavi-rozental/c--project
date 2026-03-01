@@ -2,6 +2,7 @@
 using Dal;
 using DalApi;
 using DO;
+using Tools;
 using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -22,14 +23,17 @@ class Program
         }
         catch (IdNotFoundException e)
         {
+            LogManager.Log("DalTest", "Main", $"Caught an exception: {e.Message}"); 
             Console.WriteLine($"Caught an exception: {e.Message}");
         }
         catch (IdAlreadyExistsException e)
         {
+            LogManager.Log("DalTest", "Main", $"Caught an exception: {e.Message}");
             Console.WriteLine($"Caught an exception: {e.Message}");
         }
         catch (Exception e)
         {
+            LogManager.Log("DalTest", "Main", $"Caught an unexpected exception: {e.Message}");
             Console.WriteLine($"Caught an exception: {e.Message}");
         }
 
@@ -48,6 +52,18 @@ class Program
                 case 3:
                     CrudEntity("Sale");
                     break;
+                case 5:
+                    try
+                    {
+                        LogManager.CleanLogDirectory(); // הפעלת פונקציית ניקוי הלוגים
+                        Console.WriteLine("Log directory cleaned.");
+                    }
+                    catch (Exception ex)
+                    {
+                        LogManager.Log("DalTest", "Main", $"Failed to clean log directory: {ex.Message}");
+                        Console.WriteLine("Failed to clean log directory: " + ex.Message);
+                    }
+                    break;
                 default:
                     Console.WriteLine("Invalid choice.");
                     break;
@@ -63,6 +79,7 @@ class Program
         Console.WriteLine("2. Product");
         Console.WriteLine("3. Sale");
         Console.WriteLine("4. Exit");
+        Console.WriteLine("5. cleanLog");
         Console.Write("Select entity: ");
         var s = Console.ReadLine();
         if (int.TryParse(s, out int c)) return c;
@@ -130,6 +147,7 @@ class Program
             }
             catch (Exception ex)
             {
+                LogManager.Log("DalTest", "CrudEntity", $"Operation failed: {ex.Message}");
                 Console.WriteLine("Operation failed: " + ex.Message);
             }
         }
@@ -198,6 +216,7 @@ class Program
         }
         catch (Exception ex)
         {
+            LogManager.Log("DalTest", "Create", $"Creation failed: {ex.Message}");
             Console.WriteLine("Creation failed: " + ex.Message);
         }
     }
@@ -216,6 +235,7 @@ class Program
         }
         catch (Exception ex)
         {
+            LogManager.Log("DalTest", "ReadById", $"Read failed: {ex.Message}");
             Console.WriteLine("Read failed: " + ex.Message);
         }
     }
@@ -241,6 +261,7 @@ class Program
         }
         catch (Exception ex)
         {
+            LogManager.Log("DalTest", "ReadAll", $"Read all failed: {ex.Message}");
             Console.WriteLine("Read all failed: " + ex.Message);
         }
     }
@@ -288,6 +309,7 @@ class Program
         }
         catch (Exception ex)
         {
+            LogManager.Log("DalTest", "Update", $"Update failed: {ex.Message}");
             Console.WriteLine("Update failed: " + ex.Message);
         }
     }
@@ -303,6 +325,7 @@ class Program
         }
         catch (Exception ex)
         {
+            LogManager.Log("DalTest", "Delete", $"Delete failed: {ex.Message}");
             Console.WriteLine("Delete failed: " + ex.Message);
         }
     }
