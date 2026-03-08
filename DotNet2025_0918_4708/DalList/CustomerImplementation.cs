@@ -11,14 +11,18 @@ internal class CustomerImplementation : ICustomer
     public int Create(Customer customer)
     {
         LogManager.Log("DalList", "CustomerImplementation.Create", $"Attempting to create customer with ID {customer.Id}");
+
         if (Customers.Any(c => c?.Id == customer.Id))
             throw new IdAlreadyExistsException("The ID " + customer.Id + " already exists.");
 
-        // שימוש ב-ID האוטומטי רק אם ה-ID שהתקבל הוא 0 (או ערך ברירת מחדל אחר)
-        customer.Id = customer.Id == 0 ? config.StaticValue : customer.Id;
-        Customers.Add(customer);
-        LogManager.Log("DalList", "CustomerImplementation.Create", $"Created customer with ID {customer.Id}");
-        return customer.Id;
+        // יצירת עותק חדש של הלקוח עם ה-ID המעודכן
+        int finalId = customer.Id == 0 ? config.StaticValue : customer.Id;
+        var newCustomer = customer with { Id = finalId };
+
+        Customers.Add(newCustomer);
+
+        LogManager.Log("DalList", "CustomerImplementation.Create", $"Created customer with ID {finalId}");
+        return finalId;
     }
 
     public Customer? Read(int id)

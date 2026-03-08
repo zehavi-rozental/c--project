@@ -1,10 +1,21 @@
-﻿using DalApi;
-
-namespace Dal;
-
-public class DalList : IDal
+﻿namespace DalList
 {
-    public ISale Sale => new SaleImplementation();
-    public IProduct Product => new ProductImplementation();
-    public ICustomer Customer => new CustomerImplementation();
+    // DalList: factory that returns DAL implementations
+    internal sealed class DalList : DalApi.IDal
+    {
+        // כל תכונה מחזירה מופע של מימוש המתאים בתוך פרויקט DalList
+        public DalApi.IProduct Product => new Dal.ProductImplementation();
+
+        public DalApi.ICustomer Customer => new Dal.CustomerImplementation();
+
+        public DalApi.ISale Sale => new Dal.SaleImplementation();
+
+        private DalList() { }
+
+        // single instance
+        private static readonly DalList instance = new DalList();
+
+        // public static Instance property for Factory to retrieve
+        public static DalApi.IDal Instance => instance;
+    }
 }

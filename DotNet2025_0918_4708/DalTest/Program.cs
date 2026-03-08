@@ -12,14 +12,15 @@ class Program
 {
     // הגדרת משתנה סטטי לממשק הגישה לנתונים, הממומש על ידי DalList
 
-    private static IDal s_dal = new DalList();
+    private static readonly IDal s_dal = DalApi.Factory.Get;
     static void Main()
     {
 
         try
         {
+
             // אתחול הנתונים הראשוניים
-            Initialization.Initialize(s_dal);
+            Initialization.Initialize();
         }
         catch (IdNotFoundException e)
         {
