@@ -1,21 +1,20 @@
-﻿namespace DalList
+﻿namespace Dal;
+
+// DalList: factory that returns DAL implementations
+internal sealed class DalList : DalApi.IDal
 {
-    // DalList: factory that returns DAL implementations
-    internal sealed class DalList : DalApi.IDal
-    {
-        // כל תכונה מחזירה מופע של מימוש המתאים בתוך פרויקט DalList
-        public DalApi.IProduct Product => new Dal.ProductImplementation();
+    // כל תכונה מחזירה מופע של מימוש המתאים בתוך פרויקט DalList
+    public DalApi.IProduct Product => new Dal.ProductImplementation();
 
-        public DalApi.ICustomer Customer => new Dal.CustomerImplementation();
+    public DalApi.ICustomer Customer => new Dal.CustomerImplementation();
 
-        public DalApi.ISale Sale => new Dal.SaleImplementation();
+    public DalApi.ISale Sale => new Dal.SaleImplementation();
 
-        private DalList() { }
+    private DalList() { }
 
-        // single instance
-        private static readonly DalList instance = new DalList();
+    // single instance
+    private static readonly DalList instance = new DalList();
 
-        // public static Instance property for Factory to retrieve
-        public static DalApi.IDal Instance => instance;
-    }
+    // public static Instance property for Factory to retrieve
+    public static DalApi.IDal Instance => instance;
 }

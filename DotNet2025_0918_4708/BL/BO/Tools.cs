@@ -1,49 +1,101 @@
-﻿using BlApi;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace BL.BO;
+namespace BO;
 
 internal static class Tools
 {
     public static string ToStringProperty<T>(this T obj)
     {
-        string str = $"\n{obj.GetType().Name}:";
-        foreach (PropertyInfo prop in obj.GetType().GetProperties())
+        if (obj == null)
+            return string.Empty;
+
+        var type = obj.GetType();
+        var sb = new StringBuilder();
+        sb.AppendLine(type.Name + ":");
+
+        foreach (PropertyInfo prop in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
         {
             var value = prop.GetValue(obj, null);
-            if (value is IEnumerable collection && value is not string)
-                str += $"\n{prop.Name}: " + string.Join(", ", collection.Cast<object>());
-            else
-                str += $"\n{prop.Name}: {value}";
-        }
-        return str;
-    }
-    public static TTarget CopyPropertiesTo<TTarget>(this object source) where TTarget : new()
-    {
-        // יוצרים אובייקט חדש מהסוג שאליו רוצים להמיר (למשל BO.Product)
-        TTarget target = new TTarget();
+            sb.Append(prop.Name + ": ");
 
-        // עוברים על כל התכונות של אובייקט המקור (ה-DO)
-        foreach (var sourceProp in source.GetType().GetProperties())
-        {
-            // מחפשים באובייקט היעד (ה-BO) תכונה עם אותו שם בדיוק
-            var targetProp = typeof(TTarget).GetProperty(sourceProp.Name);
-
-            // אם מצאנו תכונה כזו והיא ניתנת לכתיבה
-            if (targetProp != null && targetProp.CanWrite)
+            if (value is null)
             {
-                // מעתיקים את הערך מהמקור ליעד
-                targetProp.SetValue(target, sourceProp.GetValue(source));
+                sb.AppendLine("null");
+                continue;
             }
+
+            if (value is string)
+            {
+                sb.AppendLine(value.ToString());
+                continue;
+            }
+
+            if (value is IEnumerable collection)
+            {
+                var items = collection.Cast<object>().Select(item => item?.ToString() ?? "null");
+                sb.AppendLine("[" + string.Join(", ", items) + "]");
+                continue;
+            }
+
+            sb.AppendLine(value.ToString());
         }
-        return target;
+
+        return sb.ToString();
     }
+
+    public static Client ToBo(this global::DO.Customer source)
+        => new Client
+        {
+            Id = source.Id,
+            Name = source.Name ?? string.Empty,
+            Address = source.Address ?? string.Empty,
+            PhoneNumber = source.PhoneNumber ?? string.Empty
+        };
+
+    public static global::DO.Customer ToDo(this Client source)
+        => new global::DO.Customer(source.Id, source.Name, source.Address, source.PhoneNumber);
+
+    public static Product ToBo(this global::DO.Product source)
+        => new Product
+        {
+            Id = source.Id,
+            ProductName = source.ProductName,
+            Category = (Category)source.Category,
+            Price = source.Price,
+            Ammount = source.Ammount
+        };
+
+    public static global::DO.Product ToDo(this Product source)
+        => new global::DO.Product(source.Id, source.ProductName, (global::DO.Category)source.Category, source.Price, source.Ammount);
+
+    public static Sale ToBo(this global::DO.Sale source)
+        => new Sale
+        {
+            Id = source.Id,
+            ProductId = source.ProductId,
+            AmmontRequird = source.AmmontRequird,
+            TotalPrice = source.TotalPrice,
+            IsClubMembers = source.IsClubMembers,
+            StartSale = source.StartSale,
+            EndSale = source.EndSale
+        };
+
+    public static global::DO.Sale ToDo(this Sale source)
+        => new global::DO.Sale(source.Id, source.ProductId, source.AmmontRequird, source.TotalPrice, source.IsClubMembers, source.StartSale, source.EndSale);
+
+    public static SaleInProduct ToSaleInProduct(this global::DO.Sale sale)
+        => new SaleInProduct
+        {
+            Id = sale.Id,
+            AmountRequired = sale.AmmontRequird,
+            SalePrice = sale.TotalPrice,
+            IsForEveryone = sale.IsClubMembers
+        };
 }
     
   

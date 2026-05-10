@@ -7,5 +7,5 @@ public interface IProduct
     IEnumerable<BO.Product> ReadAll();
     void Update(BO.Product item);
     void Delete(int id);
-    void GetValidSales(BO.ProductInOrder productInOrder, bool isPreferred);
+    void GetValidSales(BO.ProductInOrder productInOrder, bool isPreferredCustomer);
 }

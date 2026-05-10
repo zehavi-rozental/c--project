@@ -16,7 +16,7 @@ internal class CustomerImplementation : ICustomer
             throw new IdAlreadyExistsException("The ID " + customer.Id + " already exists.");
 
         // יצירת עותק חדש של הלקוח עם ה-ID המעודכן
-        int finalId = customer.Id == 0 ? config.StaticValue : customer.Id;
+        int finalId = customer.Id == 0 ? Config.StaticValue : customer.Id;
         var newCustomer = customer with { Id = finalId };
 
         Customers.Add(newCustomer);

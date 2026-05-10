@@ -13,7 +13,7 @@ internal class ProductImplementation : IProduct
         if (DataSource.Products.Any(p => p?.Id == product.Id))
             throw new IdAlreadyExistsException("The ID " + product.Id + " already exists.");
 
-        int newId = DataSource.config.StaticValue;
+        int newId = DataSource.Config.StaticValue;
         Product newProduct = product with { Id = newId };
 
         DataSource.Products.Add(newProduct);

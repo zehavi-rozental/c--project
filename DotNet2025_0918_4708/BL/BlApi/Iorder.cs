@@ -4,12 +4,9 @@ namespace BlApi;
 
 public interface IOrder
 {
-    IEnumerable<SaleInProduct> SaleInProducts(Order order, int IdProduct, int ammountFororder);
+    IEnumerable<SaleInProduct> AddProductToOrder(Order order, int productId, int ammountForOrder);
     void CalcTotalPriceForProduct(ProductInOrder product);
     void CalcTotalPrice(Order order);
     void DoOrder(Order order);
-
-    void SearchSaleForProduct(ProductInOrder product,bool IsPreferredCustomer);
-
-
+    void SearchSaleForProduct(ProductInOrder product, bool isPreferredCustomer);
 }

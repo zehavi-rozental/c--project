@@ -9,7 +9,7 @@ internal static class DataSource
     internal static List<Sale?> Sales = new List<Sale?>();
     internal static List<Customer?> Customers = new List<Customer?>();
 
-    internal static class config
+    internal static class Config
     {
         internal const int initialId = 1000;
         private static int statiValue = initialId;

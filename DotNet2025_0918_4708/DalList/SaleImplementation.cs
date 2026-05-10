@@ -15,7 +15,7 @@ internal class SaleImplementation : ISale
         if (Sales.Any(s => s?.Id == sale.Id))
             throw new IdAlreadyExistsException("The ID " + sale.Id + " already exists.");
 
-        sale = sale with { Id = sale.Id == 0 ? config.StaticValue : sale.Id };
+        sale = sale with { Id = sale.Id == 0 ? Config.StaticValue : sale.Id };
         Sales.Add(sale);
         LogManager.Log("DalList", "SaleImplementation.Create", $"Created sale with ID {sale.Id}");
         return sale.Id;
