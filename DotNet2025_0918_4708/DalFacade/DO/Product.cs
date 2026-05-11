@@ -7,5 +7,5 @@ public record Product(
     double Price, 
     int Ammount)
 {
-
+    public Product() : this(0, "", default, 0, 0) { }
 }

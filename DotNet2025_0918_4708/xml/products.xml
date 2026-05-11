@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfProduct xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Product>
+    <Id>1</Id>
+    <ProductName>Smart Ambient Bulb</ProductName>
+    <Category>LIGHTING</Category>
+    <Price>79.99</Price>
+    <Ammount>25</Ammount>
+  </Product>
+  <Product>
+    <Id>2</Id>
+    <ProductName>Connected Security Camera</ProductName>
+    <Category>SECURITY</Category>
+    <Price>199.99</Price>
+    <Ammount>12</Ammount>
+  </Product>
+  <Product>
+    <Id>3</Id>
+    <ProductName>Smart Thermostat</ProductName>
+    <Category>CLIMATE</Category>
+    <Price>249.99</Price>
+    <Ammount>10</Ammount>
+  </Product>
+  <Product>
+    <Id>4</Id>
+    <ProductName>Voice Assistant Hub</ProductName>
+    <Category>AUDIO</Category>
+    <Price>129.99</Price>
+    <Ammount>18</Ammount>
+  </Product>
+  <Product>
+    <Id>5</Id>
+    <ProductName>Outdoor Floodlight</ProductName>
+    <Category>LIGHTING</Category>
+    <Price>159.99</Price>
+    <Ammount>8</Ammount>
+  </Product>
+  <Product>
+    <Id>6</Id>
+    <ProductName>Smart Door Lock</ProductName>
+    <Category>SECURITY</Category>
+    <Price>289.99</Price>
+    <Ammount>6</Ammount>
+  </Product>
+</ArrayOfProduct>

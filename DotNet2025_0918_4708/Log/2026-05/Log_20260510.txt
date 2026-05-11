@@ -1,0 +1,1 @@
+10/05/2026 23:35:24	DalTest.Main:	Caught an unexpected exception: The type initializer for 'DalApi.DalConfig' threw an exception.

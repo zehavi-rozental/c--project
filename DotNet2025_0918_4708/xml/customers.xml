@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfCustomer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Customer>
+    <Id>1</Id>
+    <Name>Rivki</Name>
+    <Address>Meromei Sade</Address>
+    <PhoneNumber>123456789</PhoneNumber>
+  </Customer>
+  <Customer>
+    <Id>2</Id>
+    <Name>Gitty</Name>
+    <Address>Ktsot</Address>
+    <PhoneNumber>1357925</PhoneNumber>
+  </Customer>
+  <Customer>
+    <Id>3</Id>
+    <Name>Yehudit</Name>
+    <Address>Shaagat Arie</Address>
+    <PhoneNumber>431221111</PhoneNumber>
+  </Customer>
+  <Customer>
+    <Id>4</Id>
+    <Name>Tovi</Name>
+    <Address>Mesilat Yosef</Address>
+    <PhoneNumber>464575678</PhoneNumber>
+  </Customer>
+  <Customer>
+    <Id>5</Id>
+    <Name>Shulamit</Name>
+    <Address>Netivot Hamishpat</Address>
+    <PhoneNumber>78787878</PhoneNumber>
+  </Customer>
+  <Customer>
+    <Id>6</Id>
+    <Name>Dvory</Name>
+    <Address>Rabi Akiva</Address>
+    <PhoneNumber>57453243</PhoneNumber>
+  </Customer>
+  <Customer>
+    <Id>1</Id>
+    <Name>Rivki</Name>
+    <Address>Meromei Sade</Address>
+    <PhoneNumber>123456789</PhoneNumber>
+  </Customer>
+  <Customer>
+    <Id>2</Id>
+    <Name>Gitty</Name>
+    <Address>Ktsot</Address>
+    <PhoneNumber>1357925</PhoneNumber>
+  </Customer>
+  <Customer>
+    <Id>3</Id>
+    <Name>Yehudit</Name>
+    <Address>Shaagat Arie</Address>
+    <PhoneNumber>431221111</PhoneNumber>
+  </Customer>
+  <Customer>
+    <Id>4</Id>
+    <Name>Tovi</Name>
+    <Address>Mesilat Yosef</Address>
+    <PhoneNumber>464575678</PhoneNumber>
+  </Customer>
+  <Customer>
+    <Id>5</Id>
+    <Name>Shulamit</Name>
+    <Address>Netivot Hamishpat</Address>
+    <PhoneNumber>78787878</PhoneNumber>
+  </Customer>
+  <Customer>
+    <Id>6</Id>
+    <Name>Dvory</Name>
+    <Address>Rabi Akiva</Address>
+    <PhoneNumber>57453243</PhoneNumber>
+  </Customer>
+</ArrayOfCustomer>

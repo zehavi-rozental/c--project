@@ -1,0 +1,5 @@
+11/05/2026 00:11:17	DalTest.Main:	Caught an unexpected exception: The type initializer for 'DalApi.DalConfig' threw an exception.
+11/05/2026 00:13:59	DalTest.Main:	Caught an unexpected exception: The type initializer for 'DalApi.DalConfig' threw an exception.
+11/05/2026 00:15:44	DalTest.Main:	Caught an unexpected exception: The type initializer for 'DalApi.DalConfig' threw an exception.
+11/05/2026 00:21:57	DalTest.Main:	Caught an unexpected exception: The type initializer for 'DalApi.DalConfig' threw an exception.
+11/05/2026 00:23:18	DalTest.Main:	Caught an unexpected exception: The type initializer for 'DalApi.DalConfig' threw an exception.

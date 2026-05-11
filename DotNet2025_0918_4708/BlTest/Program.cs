@@ -246,13 +246,7 @@ static class Program
         var value = Console.ReadLine()?.Trim();
         return Enum.TryParse<BO.Category>(value, true, out var category)
             ? category
-            : BO.Category.CAMERAS;
-    }
-
-    private static bool ReadBool(string prompt)
-    {
-        Console.Write(prompt);
-        var value = Console.ReadLine()?.Trim().ToLowerInvariant();
+                : BO.Category.LIGHTING;
         return value is "y" or "yes" or "true";
     }
 

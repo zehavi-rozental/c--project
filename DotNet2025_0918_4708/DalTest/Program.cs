@@ -18,9 +18,13 @@ class Program
 
         try
         {
-
-            // אתחול הנתונים הראשוניים
-            Initialization.Initialize();
+            Console.Write("Initialize data in XML files? (y/n): ");
+            string? input = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(input) && input.Trim().ToLower() == "y")
+            {
+                // אתחול הנתונים הראשוניים
+                Initialization.Initialize();
+            }
         }
         catch (IdNotFoundException e)
         {
@@ -189,7 +193,7 @@ class Program
             {
                 Console.Write("Id: "); int.TryParse(Console.ReadLine(), out int id);
                 Console.Write("ProductName: "); string name = Console.ReadLine() ?? "";
-                Console.Write("Category (CAMERAS/LENSES/TRIPODS/PHTOGRAFIC): "); Category category = Enum.Parse<Category>(Console.ReadLine() ?? "");
+                Console.Write("Category (LIGHTING/SECURITY/CLIMATE/AUDIO): "); Category category = Enum.Parse<Category>(Console.ReadLine() ?? "");
                 Console.Write("Price: "); double.TryParse(Console.ReadLine(), out double price);
                 Console.Write("Amount: "); int.TryParse(Console.ReadLine(), out int amount);
                 var p = new Product(id, name, category, price, amount);
@@ -286,7 +290,7 @@ class Program
             else if (typeof(T) == typeof(Product))
             {
                 Console.Write("ProductName: "); string name = Console.ReadLine() ?? "";
-                Console.Write("Category (CAMERAS/LENSES/TRIPODS/PHTOGRAFIC): "); Category category = Enum.Parse<Category>(Console.ReadLine() ?? "");
+                Console.Write("Category (LIGHTING/SECURITY/CLIMATE/AUDIO): "); Category category = Enum.Parse<Category>(Console.ReadLine() ?? "");
                 Console.Write("Price: "); double.TryParse(Console.ReadLine(), out double price);
                 Console.Write("Amount: "); int.TryParse(Console.ReadLine(), out int amount);
                 var p = new Product(id, name, category, price, amount);

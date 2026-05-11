@@ -20,16 +20,15 @@ public static class Initialization
     private static void createProducts()
     {
         // יצירת מוצרי בדיקה
-        s_dal!.Product.Create(new Product(1, "Camera A", Category.CAMERAS, 199.99, 10));
-        s_dal!.Product.Create(new Product(2, "Lens B", Category.LENSES, 99.99, 20));
-        s_dal!.Product.Create(new Product(3, "Tripod C", Category.TRIPODS, 49.99, 15));
-        s_dal!.Product.Create(new Product(4, "Photographic Book", Category.PHTOGRAFIC, 19.99, 30));
-        s_dal!.Product.Create(new Product(5, "Camera D", Category.CAMERAS, 299.99, 8));
-        s_dal!.Product.Create(new Product(6, "Lens E", Category.LENSES, 129.99, 12));
+        s_dal!.Product.Create(new Product(1, "Smart Ambient Bulb", Category.LIGHTING, 79.99, 25));
+        s_dal!.Product.Create(new Product(2, "Connected Security Camera", Category.SECURITY, 199.99, 12));
+        s_dal!.Product.Create(new Product(3, "Smart Thermostat", Category.CLIMATE, 249.99, 10));
+        s_dal!.Product.Create(new Product(4, "Voice Assistant Hub", Category.AUDIO, 129.99, 18));
+        s_dal!.Product.Create(new Product(5, "Outdoor Floodlight", Category.LIGHTING, 159.99, 8));
+        s_dal!.Product.Create(new Product(6, "Smart Door Lock", Category.SECURITY, 289.99, 6));
     }
-
     private static void createCustomers()
-    {
+     {   
         // יצירת לקוחות בדיקה
         s_dal!.Customer.Create(new Customer(1, "Rivki", "Meromei Sade", "123456789"));
         s_dal!.Customer.Create(new Customer(2, "Gitty", "Ktsot", "1357925"));

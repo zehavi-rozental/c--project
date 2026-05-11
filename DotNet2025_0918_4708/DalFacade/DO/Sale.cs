@@ -11,5 +11,5 @@ public record Sale(int Id,
     DateTime StartSale,
     DateTime EndSale)
 {
-   
+    public Sale() : this(0, 0, 0, 0, false, DateTime.MinValue, DateTime.MinValue) { }
 }
