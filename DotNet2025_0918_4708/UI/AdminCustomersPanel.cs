@@ -33,8 +33,11 @@ namespace UI
         private Label lblEditorTitle;
         private GlowInputPanel inpId;
         private GlowInputPanel inpName;
+        private GlowInputPanel inpEmail;
+        private GlowInputPanel inpPassword;
         private GlowInputPanel inpAddress;
         private GlowInputPanel inpPhone;
+        private CheckBox chkIsAdmin;
         private GlowButton btnSave;
         private GlowButton btnDelete;
         private GlowButton btnCancel;
@@ -140,7 +143,7 @@ namespace UI
         {
             var panel = new Panel
             {
-                Size      = new Size(400, 560),
+                Size      = new Size(400, 680),
                 BackColor = DS.CardBg,
             };
             panel.Paint += (s, e) =>
@@ -163,8 +166,19 @@ namespace UI
 
             inpId      = new GlowInputPanel("Customer ID")    { Location = new Point(24, 70),  Width = 352 };
             inpName    = new GlowInputPanel("Full Name")      { Location = new Point(24, 148), Width = 352 };
-            inpAddress = new GlowInputPanel("Address")        { Location = new Point(24, 226), Width = 352 };
-            inpPhone   = new GlowInputPanel("Phone Number")   { Location = new Point(24, 304), Width = 352 };
+            inpEmail    = new GlowInputPanel("Email")          { Location = new Point(24, 226), Width = 352 };
+            inpPassword = new GlowInputPanel("Password", true) { Location = new Point(24, 304), Width = 352 };
+            inpAddress  = new GlowInputPanel("Address")        { Location = new Point(24, 382), Width = 352 };
+            inpPhone    = new GlowInputPanel("Phone Number")   { Location = new Point(24, 460), Width = 352 };
+            chkIsAdmin = new CheckBox
+            {
+                Text      = "Is Admin",
+                ForeColor = DS.TextMuted,
+                BackColor = Color.Transparent,
+                AutoSize  = true,
+                Location  = new Point(24, 528),
+                Font      = DS.CaptionFont,
+            };
 
             btnSave = new GlowButton
             {
@@ -210,7 +224,7 @@ namespace UI
                 inpName.Input.Text    = "";
                 inpAddress.Input.Text = "";
                 inpPhone.Input.Text   = "";
-                btnDelete.Visible     = false;
+                chkIsAdmin.Checked     = false;
             }
             else
             {
@@ -220,7 +234,7 @@ namespace UI
                 inpName.Input.Text    = client.Name;
                 inpAddress.Input.Text = client.Address;
                 inpPhone.Input.Text   = client.PhoneNumber;
-                btnDelete.Visible     = true;
+                chkIsAdmin.Checked     = client.IsAdmin;
             }
 
             // Position editor on the right side
@@ -247,14 +261,26 @@ namespace UI
                     Name        = inpName.Input.Text,
                     Address     = inpAddress.Input.Text,
                     PhoneNumber = inpPhone.Input.Text,
+                    Email       = inpEmail.Input.Text,
+                    Password    = inpPassword.Input.Text,
                 };
 
                 if (_editingClient == null)
-                    // BL: bl.Client.Create(client)
+                {
+                    // New client: assign a default password so the account is usable.
+                    if (string.IsNullOrEmpty(client.Password)) client.Password = "1234";
                     _bl.Client.Create(client);
+                }
                 else
-                    // BL: bl.Client.Update(client)
+                {
+                    // Preserve existing password when left blank in the editor
+                    var existing = _bl.Client.Read(_editingClient.Id);
+                    if (existing != null)
+                    {
+                        if (string.IsNullOrEmpty(client.Password)) client.Password = existing.Password;
+                    }
                     _bl.Client.Update(client);
+                }
 
                 CloseEditor();
                 LoadCards(searchBox.Input.Text);

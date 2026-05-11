@@ -3,3 +3,21 @@
 11/05/2026 00:15:44	DalTest.Main:	Caught an unexpected exception: The type initializer for 'DalApi.DalConfig' threw an exception.
 11/05/2026 00:21:57	DalTest.Main:	Caught an unexpected exception: The type initializer for 'DalApi.DalConfig' threw an exception.
 11/05/2026 00:23:18	DalTest.Main:	Caught an unexpected exception: The type initializer for 'DalApi.DalConfig' threw an exception.
+11/05/2026 23:12:47	DalXml.LoadCustomers:	Resolved customers.xml path: C:\Users\user\Documents\GitHub\c--project\DotNet2025_0918_4708\xml\customers.xml
+11/05/2026 23:12:47	DalXml.LoadCustomers:	Loaded 3 customers: Admin (pwdLen=3); Cashier (pwdLen=7); Manager (pwdLen=3)
+11/05/2026 23:12:47	DalXml.LoadCustomers:	Resolved customers.xml path: C:\Users\user\Documents\GitHub\c--project\DotNet2025_0918_4708\xml\customers.xml
+11/05/2026 23:12:47	DalXml.LoadCustomers:	Loaded 4 customers: Admin (pwdLen=3); Cashier (pwdLen=7); Manager (pwdLen=3); Manager (pwdLen=3)
+11/05/2026 23:14:13	BL.Login:	Attempt login 'Cashier' pwdLen=7
+11/05/2026 23:14:13	DalXml.LoadCustomers:	Resolved customers.xml path: C:\Users\user\Documents\GitHub\c--project\DotNet2025_0918_4708\xml\customers.xml
+11/05/2026 23:14:13	DalXml.LoadCustomers:	Loaded 5 customers: Admin (pwdLen=3); Cashier (pwdLen=7); Manager (pwdLen=3); Manager (pwdLen=3); Cashier (pwdLen=3)
+11/05/2026 23:14:13	BL.Login:	Inspect Customer Id=1 Name='Admin' Email='admin' nameMatch=False emailMatch=False pwdMatch=False
+11/05/2026 23:14:13	BL.Login:	Inspect Customer Id=2 Name='Cashier' Email='cashier' nameMatch=True emailMatch=True pwdMatch=True
+11/05/2026 23:24:32	DalXml.LoadCustomers:	Resolved customers.xml path: C:\Users\user\Documents\GitHub\c--project\DotNet2025_0918_4708\xml\customers.xml
+11/05/2026 23:24:32	DalXml.LoadCustomers:	Loaded 3 customers: Admin (pwdLen=3); Cashier (pwdLen=3); Manager (pwdLen=3)
+11/05/2026 23:24:32	DalXml.LoadCustomers:	Resolved customers.xml path: C:\Users\user\Documents\GitHub\c--project\DotNet2025_0918_4708\xml\customers.xml
+11/05/2026 23:24:32	DalXml.LoadCustomers:	Loaded 4 customers: Admin (pwdLen=3); Cashier (pwdLen=3); Manager (pwdLen=3); Manager (pwdLen=3)
+11/05/2026 23:25:02	BL.Login:	Attempt login 'Cashier' pwdLen=3
+11/05/2026 23:25:02	DalXml.LoadCustomers:	Resolved customers.xml path: C:\Users\user\Documents\GitHub\c--project\DotNet2025_0918_4708\xml\customers.xml
+11/05/2026 23:25:02	DalXml.LoadCustomers:	Loaded 5 customers: Admin (pwdLen=3); Cashier (pwdLen=3); Manager (pwdLen=3); Manager (pwdLen=3); Cashier (pwdLen=3)
+11/05/2026 23:25:02	BL.Login:	Inspect Customer Id=1 Name='Admin' Email='admin' nameMatch=False emailMatch=False pwdMatch=True
+11/05/2026 23:25:02	BL.Login:	Inspect Customer Id=2 Name='Cashier' Email='cashier' nameMatch=True emailMatch=True pwdMatch=True

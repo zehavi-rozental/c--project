@@ -185,7 +185,7 @@ class Program
                 Console.Write("Name: "); string name = Console.ReadLine() ?? "";
                 Console.Write("Address: "); string address = Console.ReadLine() ?? "";
                 Console.Write("Phone: "); string phone = Console.ReadLine() ?? "";
-                var c = new Customer(id, name, address, phone);
+                var c = new Customer(id, name, string.Empty, string.Empty, address, phone, false);
                 int newId = repo.Create((T)(Object)c);
                 Console.WriteLine($"Created: {c} with ID: {newId}");
             }
@@ -283,7 +283,7 @@ class Program
                 Console.Write("Name: "); string name = Console.ReadLine() ?? "";
                 Console.Write("Address: "); string address = Console.ReadLine() ?? "";
                 Console.Write("Phone: "); string phone = Console.ReadLine() ?? "";
-                var c = new Customer(id, name, address, phone);
+                var c = new Customer(id, name, string.Empty, string.Empty, address, phone, false);
                 repo.Update((T)(object)c);
                 Console.WriteLine("Updated.");
             }

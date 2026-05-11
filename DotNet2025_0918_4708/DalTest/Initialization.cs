@@ -28,16 +28,13 @@ public static class Initialization
         s_dal!.Product.Create(new Product(6, "Smart Door Lock", Category.SECURITY, 289.99, 6));
     }
     private static void createCustomers()
-     {   
-        // יצירת לקוחות בדיקה
-        s_dal!.Customer.Create(new Customer(1, "Rivki", "Meromei Sade", "123456789"));
-        s_dal!.Customer.Create(new Customer(2, "Gitty", "Ktsot", "1357925"));
-        s_dal!.Customer.Create(new Customer(3, "Yehudit", "Shaagat Arie", "431221111"));
-        s_dal!.Customer.Create(new Customer(4, "Tovi", "Mesilat Yosef", "464575678"));
-        s_dal!.Customer.Create(new Customer(5, "Shulamit", "Netivot Hamishpat", "78787878"));
-        s_dal!.Customer.Create(new Customer(6, "Dvory", "Rabi Akiva", "57453243"));
-    }
+     {  
 
+// הוספת קופאי/לקוח רגיל
+        // יצירת לקוחות בדיקה
+        s_dal!.Customer.Create(new DO.Customer(1, "Manager", "admin", "123", "Main St", "0501234567", true));
+        s_dal!.Customer.Create(new DO.Customer(2, "Cashier", "user", "123", "Second St", "0507654321", false));
+     }
     private static void createSales()
     {
         // יצירת מבצעי בדיקה

@@ -36,28 +36,46 @@ namespace UI
                 return;
             }
 
-            // ── Role routing ──────────────────────────────────────────────
-            // TODO (BL): replace hardcoded check with bl.Auth.Validate(username, password)
-            if (username.Equals("admin", StringComparison.OrdinalIgnoreCase) && password == "admin")
+            // Use BL for authentication (supports Email or Name)
+            try
             {
-                OpenRole(UserRole.Admin);
+                try { Tools.LogManager.Log("UI", "btnLogin_Click", $"Login attempt for '{username}'"); } catch { }
+                var session = _bl.Login(username, password);
+                try { Tools.LogManager.Log("UI", "btnLogin_Click", $"Login success for '{username}' (Id={session.Id}, IsAdmin={session.IsAdmin})"); } catch { }
+                if (session == null)
+                {
+                    ShowValidationError("Invalid credentials. Try admin/admin or cashier/cashier.");
+                    return;
+                }
+
+                OpenRole(session.IsAdmin ? UserRole.Admin : UserRole.Cashier);
             }
-            else if (username.Equals("cashier", StringComparison.OrdinalIgnoreCase) && password == "cashier")
+            catch (Exception ex)
             {
-                OpenRole(UserRole.Cashier);
-            }
-            else
-            {
-                ShowValidationError("Invalid credentials. Try admin/admin or cashier/cashier.");
+                try { Tools.LogManager.Log("UI", "btnLogin_Click", $"Login failed for '{username}': {ex}"); } catch { }
+                ShowValidationError(ex.Message ?? "Invalid credentials.");
             }
         }
 
         private void OpenRole(UserRole role)
         {
-            this.Hide();
-            var shell = new ShellForm(_bl, role);
-            shell.FormClosed += (s, e) => this.Close();
-            shell.Show();
+            // Create the ShellForm first. If construction fails, keep the login form visible.
+            ShellForm? shell = null;
+            try
+            {
+                shell = new ShellForm(_bl, role);
+                // When the shell closes (logout), show the login form again instead of closing the app.
+                shell.FormClosed += (s, e) => this.Show();
+                shell.Show();
+                this.Hide();
+            }
+            catch (Exception ex)
+            {
+                // If shell failed to open, ensure it's disposed, log full details and show the error.
+                shell?.Dispose();
+                try { Tools.LogManager.Log("UI", "OpenRole", ex.ToString()); } catch { }
+                ShowValidationError("Failed to open application shell: " + (ex.Message ?? "Unknown error"));
+            }
         }
 
         private void ShowValidationError(string message)

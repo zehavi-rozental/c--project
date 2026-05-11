@@ -53,12 +53,15 @@ internal static class Tools
         {
             Id = source.Id,
             Name = source.Name ?? string.Empty,
+            Email = source.Email ?? string.Empty,
+            Password = source.Password ?? string.Empty,
             Address = source.Address ?? string.Empty,
-            PhoneNumber = source.PhoneNumber ?? string.Empty
+            PhoneNumber = source.PhoneNumber ?? string.Empty,
+            IsAdmin = source.IsAdmin
         };
 
     public static global::DO.Customer ToDo(this Client source)
-        => new global::DO.Customer(source.Id, source.Name, source.Address, source.PhoneNumber);
+        => new global::DO.Customer(source.Id, source.Name, source.Email, source.Password, source.Address, source.PhoneNumber, source.IsAdmin);
 
     public static Product ToBo(this global::DO.Product source)
         => new Product

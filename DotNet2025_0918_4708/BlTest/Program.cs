@@ -26,6 +26,10 @@ static class Program
 
             switch (input)
             {
+                case "L":
+                case "l":
+                    TestLogin();
+                    break;
                 case "1": ListCustomers(); break;
                 case "2": AddCustomer(); break;
                 case "3": ListProducts(); break;
@@ -49,6 +53,7 @@ static class Program
     private static void PrintMenu()
     {
         Console.WriteLine("BL manual test menu:");
+        Console.WriteLine("L - Test login");
         Console.WriteLine("1 - List customers");
         Console.WriteLine("2 - Add customer");
         Console.WriteLine("3 - List products");
@@ -247,7 +252,15 @@ static class Program
         return Enum.TryParse<BO.Category>(value, true, out var category)
             ? category
                 : BO.Category.LIGHTING;
-        return value is "y" or "yes" or "true";
+    }
+
+    private static bool ReadBool(string prompt)
+    {
+        Console.Write(prompt);
+        var value = Console.ReadLine();
+        if (string.IsNullOrWhiteSpace(value)) return false;
+        value = value.Trim().ToLower();
+        return value == "y" || value == "yes" || value == "true";
     }
 
     private static DateTime ReadDate(string prompt)
@@ -255,5 +268,24 @@ static class Program
         Console.Write(prompt);
         var value = Console.ReadLine();
         return DateTime.TryParse(value, out var result) ? result : DateTime.Now;
+    }
+
+    private static void TestLogin()
+    {
+        Console.Write("Email or name to test (default 'Cashier'): ");
+        var user = Console.ReadLine();
+        if (string.IsNullOrWhiteSpace(user)) user = "Cashier";
+        Console.Write("Password (default 'cashier'): ");
+        var pwd = Console.ReadLine() ?? string.Empty;
+
+        try
+        {
+            var session = s_bl.Login(user, pwd);
+            Console.WriteLine($"Login success: Id={session.Id}, Name={session.Name}, IsAdmin={session.IsAdmin}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Login failed: {ex.Message}");
+        }
     }
 }

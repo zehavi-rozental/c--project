@@ -25,9 +25,16 @@ namespace UI
         {
             _bl   = bl;
             _role = role;
-            InitializeComponent();
-            BuildNavigation();
-            ShowDefaultPanel();
+            try
+            {
+                InitializeComponent();
+                BuildNavigation();
+                ShowDefaultPanel();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Shell initialization failed: " + ex.Message, ex);
+            }
         }
 
         // ── Navigation ────────────────────────────────────────────────────

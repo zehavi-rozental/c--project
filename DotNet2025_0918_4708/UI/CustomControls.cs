@@ -58,14 +58,13 @@ namespace UI
         {
             _label      = label;
             Size        = new Size(368, 64);
-            BackColor   = Color.Transparent;
+            BackColor   = DS.CardBg;
 
             Input = new GlowTextBox
             {
                 Location              = new Point(12, 28),
                 Size                  = new Size(Width - 24, 28),
                 Anchor                = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top,
-                BackColor             = Color.Transparent,
                 UseSystemPasswordChar = isPassword,
             };
             Controls.Add(Input);
@@ -107,7 +106,8 @@ namespace UI
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
-            Input.Width = Width - 24;
+            if (Input != null)
+                Input.Width = Math.Max(0, Width - 24);
         }
     }
 
@@ -864,7 +864,8 @@ namespace UI
         protected override void OnResize(EventArgs e)
         {
             base.OnResize(e);
-            Input.Width = Width - 44;
+            if (Input != null)
+                Input.Width = Math.Max(0, Width - 44);
         }
     }
 }

@@ -24,6 +24,7 @@ namespace UI
         private Panel pnlRight;
         private Panel pnlCartHeader;
         private FlowLayoutPanel flpCartItems;
+        private FlowLayoutPanel flpProductGrid;
         private Panel pnlSummary;
 
         // ── Left: add product area ─────────────────────────────────────────
@@ -112,6 +113,7 @@ namespace UI
                 Width    = 260,
             };
             productSearch.Input.TextChanged += OnProductSearchChanged;
+            productSearch.Input.KeyDown += OnProductSearchKeyDown;
 
             lblOrDivider = new Label
             {
@@ -135,7 +137,8 @@ namespace UI
                 Text      = "No product selected",
                 ForeColor = DS.TextHint,
                 Font      = DS.CaptionFont,
-                AutoSize  = true,
+                AutoSize  = false,
+                Size      = new Size(680, 48),
                 Location  = new Point(16, 88),
             };
 
@@ -188,6 +191,36 @@ namespace UI
             { lblSelectTitle, productSearch, lblOrDivider, btnOpenCatalog,
               lblSelectedProduct, lblQty, numQty, chkPreferred, btnAddToOrder });
 
+            // ── Compact product grid (quick-add tiles) ──────────────
+            flpProductGrid = new FlowLayoutPanel
+            {
+                Dock         = DockStyle.Top,
+                Height       = 360,
+                BackColor    = Color.Transparent,
+                AutoScroll   = true,
+                WrapContents = true,
+                FlowDirection= FlowDirection.LeftToRight,
+                Padding      = new Padding(8),
+            };
+
+            try
+            {
+                var products = _bl.Product.ReadAll().ToList();
+                // Limit initial tiles to avoid overcrowding
+                foreach (var p in products.Take(120))
+                {
+                    var tile = new ProductPickerTile(p);
+                    tile.Selected += (s, e) =>
+                    {
+                        _selectedProduct = p;
+                        productSearch.Input.Text = p.ProductName;
+                        UpdateSelectedLabel();
+                    };
+                    flpProductGrid.Controls.Add(tile);
+                }
+            }
+            catch { /* safe-fail: grid stays empty if BL unavailable */ }
+
             // ── Cart list ──────────────────────────────────────────────────
             pnlCartHeader = new Panel
             {
@@ -215,6 +248,7 @@ namespace UI
 
             pnlLeft.Controls.Add(flpCartItems);
             pnlLeft.Controls.Add(pnlCartHeader);
+            pnlLeft.Controls.Add(flpProductGrid);
             pnlLeft.Controls.Add(pnlSelectBar);
         }
 
@@ -306,11 +340,89 @@ namespace UI
         private void UpdateSelectedLabel()
         {
             if (_selectedProduct == null)
+            {
                 lblSelectedProduct.Text = "No product selected";
-            else
-                lblSelectedProduct.Text = $"✓  {_selectedProduct.ProductName}  ·  ₪{_selectedProduct.Price:N2}  ·  Stock: {_selectedProduct.Ammount}";
+                lblSelectedProduct.ForeColor = DS.TextHint;
+                return;
+            }
 
-            lblSelectedProduct.ForeColor = _selectedProduct != null ? DS.Accent : DS.TextHint;
+            // Basic details
+            var lines = new System.Text.StringBuilder();
+            lines.Append($"✓  {_selectedProduct.ProductName}  ·  ₪{_selectedProduct.Price:N2}  ·  Stock: {_selectedProduct.Ammount}");
+            lines.AppendLine();
+            lines.Append($"ID: {_selectedProduct.Id}  ·  Category: {DS.CategoryLabel(_selectedProduct.Category)}");
+
+            try
+            {
+                // Show available promotions for the selected quantity and preference
+                var temp = new BO.ProductInOrder
+                {
+                    ProductId = _selectedProduct.Id,
+                    ProductName = _selectedProduct.ProductName,
+                    BasePrice = _selectedProduct.Price,
+                    Amount = (int)numQty.Value,
+                };
+                _bl.Product.GetValidSales(temp, chkPreferred.Checked);
+
+                if (temp.Sales != null && temp.Sales.Any())
+                {
+                    var promoLines = string.Join(", ", temp.Sales.Select(s => $"{s.AmountRequired} → ₪{s.SalePrice:N2}"));
+                    lines.AppendLine();
+                    lines.Append($"Promos: {promoLines}");
+                }
+            }
+            catch { /* ignore BL lookup errors for display */ }
+
+            lblSelectedProduct.Text = lines.ToString();
+            lblSelectedProduct.ForeColor = DS.Accent;
+        }
+
+        private void OnProductSearchKeyDown(object? sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter) return;
+            e.Handled = true;
+            e.SuppressKeyPress = true;
+
+            var text = productSearch.Input.Text?.Trim();
+            if (string.IsNullOrEmpty(text)) return;
+
+            try
+            {
+                // Try by id first
+                BO.Product? found = null;
+                if (int.TryParse(text, out var id))
+                {
+                    found = _bl.Product.Read(id);
+                }
+
+                // Fallback by exact or contains name
+                if (found == null)
+                {
+                    found = _bl.Product.ReadAll()
+                        .FirstOrDefault(p => p.ProductName.Equals(text, StringComparison.OrdinalIgnoreCase)
+                                          || p.ProductName.Contains(text, StringComparison.OrdinalIgnoreCase));
+                }
+
+                if (found == null)
+                {
+                    MessageBox.Show("Product not found.", "Not Found", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                _selectedProduct = found;
+                UpdateSelectedLabel();
+
+                // Add default qty to order for quick POS flow
+                var qty = (int)numQty.Value;
+                _bl.Order.AddProductToOrder(_currentOrder, _selectedProduct.Id, qty);
+                _currentOrder.IsPreferredCustomer = chkPreferred.Checked;
+                RecalcOrder();
+                numQty.Value = 1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         // ── Catalog modal ─────────────────────────────────────────────────
