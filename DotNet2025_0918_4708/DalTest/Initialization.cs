@@ -36,12 +36,24 @@ public static class Initialization
         s_dal!.Customer.Create(new DO.Customer(2, "Cashier", "user", "123", "Second St", "0507654321", false));
      }
     private static void createSales()
-    {
-        // יצירת מבצעי בדיקה
-        s_dal!.Sale.Create(new Sale(1, 1, 1, 199.99, true, new DateTime(2025, 6, 15), new DateTime(2025, 6, 25)));
-        s_dal!.Sale.Create(new Sale(2, 2, 2, 170.00, false, new DateTime(2025, 7, 1), new DateTime(2025, 7, 30)));
-        s_dal!.Sale.Create(new Sale(3, 3, 1, 40.00, true, new DateTime(2025, 8, 1), new DateTime(2025, 8, 10)));
-        s_dal!.Sale.Create(new Sale(4, 4, 3, 50.00, false, new DateTime(2025, 9, 1), new DateTime(2025, 9, 10)));
-        s_dal!.Sale.Create(new Sale(5, 5, 2, 500.00, true, new DateTime(2025, 10, 1), new DateTime(2025, 10, 15)));
-    }
+{
+    var now = DateTime.Now;
+
+    // מוצר 1 (Smart Ambient Bulb) — שני מבצעים במקביל
+    // מבצע A: קנה 2 ב-120 ₪ (60 ₪ ליחידה)
+    s_dal!.Sale.Create(new Sale(1, 1, 2, 120.00, false, now.AddDays(-1), now.AddDays(30)));
+    // מבצע B: קנה 5 ב-250 ₪ (50 ₪ ליחידה) — משתלם יותר בכמות גדולה
+    s_dal!.Sale.Create(new Sale(2, 1, 5, 250.00, false, now.AddDays(-1), now.AddDays(30)));
+    // מבצע C: קנה 3 ב-165 ₪ (55 ₪ ליחידה) — לחברי מועדון בלבד
+    s_dal!.Sale.Create(new Sale(3, 1, 3, 165.00, true, now.AddDays(-1), now.AddDays(30)));
+
+    // מוצר 2 (Connected Security Camera) — שני מבצעים
+    // מבצע D: קנה 2 ב-350 ₪ (175 ₪ ליחידה)
+    s_dal!.Sale.Create(new Sale(4, 2, 2, 350.00, false, now.AddDays(-1), now.AddDays(30)));
+    // מבצע E: קנה 4 ב-640 ₪ (160 ₪ ליחידה) — משתלם יותר
+    s_dal!.Sale.Create(new Sale(5, 2, 4, 640.00, false, now.AddDays(-1), now.AddDays(30)));
+
+    // מוצר 3 — מבצע יחיד
+    s_dal!.Sale.Create(new Sale(6, 3, 1, 200.00, false, now.AddDays(-1), now.AddDays(30)));
+}
 }

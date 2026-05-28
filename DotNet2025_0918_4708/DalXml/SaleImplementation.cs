@@ -46,12 +46,15 @@ internal class SaleImplementation : ISale
     }
 
     public int Create(Sale item)
-    {
-        XElement root = LoadSales();
-        root.Add(SaleToElement(item));
-        SaveSales(root);
-        return item.Id;
-    }
+{
+    XElement root = LoadSales();
+    bool exists = root.Elements("Sale").Any(e => (int)e.Element("Id") == item.Id);
+    if (exists)
+        throw new Dal.IdAlreadyExistsException($"Sale with Id {item.Id} already exists.");
+    root.Add(SaleToElement(item));
+    SaveSales(root);
+    return item.Id;
+}
 
     public Sale? Read(int id)
     {

@@ -79,41 +79,52 @@ internal class orderImplementation : IOrder
     }
 
     public void CalcTotalPriceForProduct(BO.ProductInOrder product)
+{
+    if (product is null)
+        throw new BO.BLInvalidInputException("Product in order cannot be null.");
+
+    int n = product.Amount;
+    var sales = product.Sales;
+
+    var dp = new double[n + 1];
+    var choice = new BO.SaleInProduct?[n + 1];
+
+    for (int i = 1; i <= n; i++)
     {
-        if (product is null)
-            throw new BO.BLInvalidInputException("Product in order cannot be null.");
+        dp[i] = dp[i - 1] + product.BasePrice;
+        choice[i] = null;
 
-        var orderedSales = product.Sales
-            .OrderBy(s => s.SalePrice / Math.Max(1, s.AmountRequired))
-            .ToList();
-
-        var remaining = product.Amount;
-        var usedSales = new List<BO.SaleInProduct>();
-        var total = 0.0;
-
-        foreach (var sale in orderedSales)
+        foreach (var sale in sales)
         {
-            if (remaining < sale.AmountRequired)
-                continue;
-
-            var times = remaining / sale.AmountRequired;
-            total += times * sale.SalePrice;
-            remaining -= times * sale.AmountRequired;
-
-            if (times > 0)
-                usedSales.Add(sale);
-
-            if (remaining == 0)
-                break;
+            int qty = sale.AmountRequired;
+            if (i >= qty && dp[i - qty] + sale.SalePrice < dp[i])
+            {
+                dp[i] = dp[i - qty] + sale.SalePrice;
+                choice[i] = sale;
+            }
         }
-
-        if (remaining > 0)
-            total += remaining * product.BasePrice;
-
-        product.Sales = usedSales;
-        product.FinalPrice = total;
     }
 
+    var usedSales = new List<BO.SaleInProduct>();
+    int remaining = n;
+    while (remaining > 0)
+    {
+        var selected = choice[remaining];
+        if (selected is not null)
+        {
+            if (!usedSales.Contains(selected))
+                usedSales.Add(selected);
+            remaining -= selected.AmountRequired;
+        }
+        else
+        {
+            remaining--;
+        }
+    }
+
+    product.Sales = usedSales;
+    product.FinalPrice = dp[n];
+}
     public void CalcTotalPrice(BO.Order order)
     {
         if (order is null)
